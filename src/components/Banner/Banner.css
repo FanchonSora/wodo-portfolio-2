@@ -1,405 +1,506 @@
+/* Enhanced Banner Styles */
 .banner {
+  position: relative;
   width: 100%;
-  margin-top: 0px; /* Đảm bảo sát dưới Header */
-  /* border: 2px solid green; */
-  
+  margin-top: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 24px 24px;
+}
+
+/* Animated background particles */
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+  animation: backgroundFloat 20s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes backgroundFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+.banner-image-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
 .banner-image {
   width: 100%;
+  max-width: 800px;
   height: auto;
   display: block;
-  object-fit: cover;
-  margin-top: 0px;
-  opacity: 0; /* Bắt đầu với độ mờ */
-  transition: opacity 2.1s ease-in-out; /* Hiệu ứng mờ dần */
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.1) translateY(20px);
+  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: brightness(1.1) contrast(1.1) saturate(1.2);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 
-/* Khi ảnh đã load xong, áp dụng lớp "loaded" */
 .banner-image.loaded {
   opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
-/* Logo overlay đè lên ảnh */
-.overlay-logos {
-  position: absolute;
-  top: 90px;
-  right: 81px;
-  display: flex;
-  gap: 12px;
-  z-index: 10;
-}
-
-.overlay-logos .logo {
-   
-  height: auto;
-  object-fit: contain;
-  opacity: 0;
-  transform: scale(0.9);
-  animation: popup 1s ease-out forwards;
-}
-
-/* Hiện ra lần lượt mỗi logo */
-.overlay-logos .logo:nth-child(1) {
-  animation-delay: 0.3s;
-}
-.overlay-logos .logo:nth-child(2) {
-  animation-delay: 0.6s;
-}
-.overlay-logos .logo:nth-child(3) {
-  animation-delay: 0.9s;
-}
-.overlay-logos .logo:nth-child(4) {
-  animation-delay: 1.2s;
-}
-@keyframes popup {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-
-.logo {
-  width: 80px;
-  height: auto;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-  opacity: 1; /* không làm mờ */
-  margin-top: 10px;
- 
-}
-
-
-.left-logo-group {
-  position: absolute;
-  top: 145px;
-  left: -300px; /* Bắt đầu ở ngoài màn hình bên trái */
-  transform: translateY(-50%);
+.banner-fallback {
+  width: 100%;
+  height: 450px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   display: flex;
   align-items: center;
-  gap: 12px;
-  z-index: 10;
-  height: 80px;
-  animation: slideIn 3.5s forwards; /* Áp dụng animation slideIn */
+  justify-content: center;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes slideIn {
-  0% {
-    left: -400px; /* Bắt đầu từ ngoài màn hình trái */
-  }
-  100% {
-    left: 20px; /* Đến vị trí cuối cùng (tương ứng với giá trị left mà bạn muốn) */
-  }
+.banner-fallback::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
 }
 
-/* Các phần tử con bên trong vẫn giữ nguyên kiểu dáng */
-.logo {
-  width: 80px;
-  height: auto;
-  object-fit: contain;
+@keyframes shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.left-logo-text-group {
+.banner-fallback-content {
+  position: relative;
+  z-index: 2;
+}
+
+.banner-fallback-content h2 {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.05em;
+  background: linear-gradient(45deg, #ffffff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.banner-fallback-content p {
+  font-size: 1.4rem;
+  opacity: 0.95;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.banner-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 5px;
-}
-
-.left-logo-text1 {
-  font-size: 25px;
-  font-weight: bold;
+  align-items: center;
+  gap: 1.5rem;
   color: #ffffff;
-  text-shadow: 1px 1px 9px rgba(0, 0, 0, 0.6); /* Đổ bóng mềm */
+  z-index: 3;
 }
 
-.left-logo-text2 {
-  font-size: 15px;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng nhẹ */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
-@media (max-width: 1500px) {
-  .logo {
-    width: 60px;
-  }
-
-  .left-logo-text1 {
-    font-size: 22px;
-  }
-
-  .left-logo-text2 {
-    font-size: 14px;
-  }
-
-  
-
-  .left-logo-group {
-    left: 60px;
-    top: 130px; /* Giảm từ 145px xuống */
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 1250px) {
-  .logo {
-    width: 50px;
-  }
-
-  .left-logo-text1 {
-    font-size: 20px;
-  }
-
-  .left-logo-text2 {
-    font-size: 12px;
-  }
-
- 
-
-  .left-logo-group {
-    left: 50px;
-    top: 130px;
-  }
+.banner-loading p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 1150px) {
-  .logo {
-    width: 45px;
-  }
-
-  .left-logo-text1 {
-    font-size: 18px;
-  }
-
-  .left-logo-text2 {
-    font-size: 10px;
-  }
-
- 
-
-  .left-logo-group {
-    left: 45px;
-    top: 130px;
-  }
-}
-
-@media (max-width: 1050px) {
-  .logo {
-    width: 40px;
-  }
-
-  .left-logo-text1 {
-    font-size: 14px;
-  }
-
-  .left-logo-text2 {
-    font-size: 8px;
-  }
-
-  .overlay-logos {
-    right: 30px;
-    
-  }
-
-  .left-logo-group {
-    left: 40px;
-    top: 115px;
-  }
-}
-@media (max-width: 770px) {
-  .logo {
-    width: 30px;
-  }
-
-  .left-logo-text1 {
-    font-size: 12px;
-  }
-
-  .left-logo-text2 {
-    font-size: 6px;
-  }
-  .overlay-logos {
-    right: 30px;
-    top: 67px;
-  }
-  
-
-  .left-logo-group {
-    left: 30px;
-    top: 95px;
-  }
-}
-@media (max-width: 670px) {
-  .logo {
-    width: 25px;
-  }
-
-  .left-logo-text1 {
-    font-size: 11px;
-  }
-
-  .left-logo-text2 {
-    font-size: 6px;
-  }
-
- 
-
-  .left-logo-group {
-    left: 25  px;
-    top: 90px;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .logo {
-    width: 20px;
-  }
-
-  .left-logo-text1 {
-    font-size: 7px;
-  }
-
-  .left-logo-text2 {
-    font-size: 5px;
-  }
-
-  
-  .left-logo-group {
-    left: 20px;
-    top: 87px;
-  }
-}
-
-@media (max-width: 400px) {
-  .logo {
-    width: 20px;
-  }
-
-  .left-logo-text1 {
-    font-size: 5px;
-  }
-
-  .left-logo-text2 {
-    font-size: 5px;
-  }
-
-  
-
-  .left-logo-group {
-    left: 20px;
-    top: 85px;
-  }
-}
-.center-moving-logo {
-  position: absolute;
-  top: 20%;
-  transform: translateY(-50%);
-  width: 30px;
-  animation: moveAcross 12s linear infinite;
-  z-index: 10;
-}
-
-.center-moving-logo:nth-child(1) {
-  animation-delay: 0.1s;
-}
- 
-
-@keyframes moveAcross {
-  0% {
-    left: -150px;
-  }
-  100% {
-    left: 100vw;
-  }
-}
 .moving-text-container {
-  position: relative;
+  position: absolute;
+  top: 15%;
   width: 100%;
-  height: 100px; /* hoặc chiều cao bạn muốn */
+  height: 120px;
   overflow: hidden;
+  pointer-events: none;
+  z-index: 4;
 }
 
 .center-moving-text {
   position: absolute;
   top: 50%;
-  left: -800px; /* ⬅ thêm dòng này để đồng bộ */
+  left: -100%;
   transform: translateY(-50%);
-  font-size: 80px;
-  font-weight: bold;
-  color: #01A85A;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-  animation: moveAcross 12s linear infinite;
-  z-index:10;
-  
+  text-shadow: 
+    3px 3px 6px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  animation: moveAcross 15s linear infinite;
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.15em;
+  background: linear-gradient(45deg, #ffffff, #f0f0f0, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: moveAcross 15s linear infinite, textShine 3s ease-in-out infinite;
 }
-
 
 @keyframes moveAcross {
   0% {
-    left: -800px;
+    left: -100%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
   }
   100% {
-    left: 100vw;
+    left: 100%;
+    opacity: 0;
   }
 }
 
-/* Delay đều nhau cho hiệu ứng nối tiếp */
-.center-moving-text:nth-child(1) { animation-delay: 0s; }
-.center-moving-text:nth-child(2) { animation-delay: 2.4s; }
-.center-moving-text:nth-child(3) { animation-delay: 4.8s; }
-.center-moving-text:nth-child(4) { animation-delay: 7.2s; }
-.center-moving-text:nth-child(5) { animation-delay: 9.6s; }
-
-
-.moving-text-container {
-  position: relative;
-  width: 100%;
-  height: 100px; /* Chiều cao mặc định */
-  overflow: hidden;
+@keyframes textShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* Khi màn hình nhỏ, giảm chiều cao container */
-@media (max-width: 1250px) {
+.left-logo-group {
+  position: absolute;
+  top: 50%;
+  left: -500px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  animation: slideInLeft 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.8s;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideInLeft {
+  0% {
+    left: -500px;
+    opacity: 0;
+    transform: translateY(-50%) rotate(-5deg);
+  }
+  100% {
+    left: 2rem;
+    opacity: 1;
+    transform: translateY(-50%) rotate(0deg);
+  }
+}
+
+.main-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    0 0 0 3px rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.main-logo:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(255, 255, 255, 0.9);
+}
+
+.left-logo-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.left-logo-text1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1a202c;
+  line-height: 1.2;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.left-logo-text1.english {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #4a5568;
+  font-weight: 600;
+  -webkit-text-fill-color: #4a5568;
+}
+
+.left-logo-text2 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #718096;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-logos {
+  position: absolute;
+  top: 4rem;
+  right: 3rem;
+  display: flex;
+  gap: 1.5rem;
+  z-index: 10;
+  flex-wrap: wrap;
+}
+
+.logo-wrapper {
+  opacity: 0;
+  transform: scale(0.3) rotate(180deg) translateY(50px);
+  animation: popupRotate 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.logo-wrapper:nth-child(1) { animation-delay: 1s; }
+.logo-wrapper:nth-child(2) { animation-delay: 1.3s; }
+.logo-wrapper:nth-child(3) { animation-delay: 1.6s; }
+.logo-wrapper:nth-child(4) { animation-delay: 1.9s; }
+
+@keyframes popupRotate {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(180deg) translateY(50px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(90deg) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg) translateY(0);
+  }
+}
+
+.overlay-logo {
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 0.75rem;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  filter: brightness(1.05) contrast(1.05);
+}
+
+.overlay-logo:hover {
+  transform: translateY(-8px) scale(1.08) rotate(2deg);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.25),
+    0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Floating elements */
+.floating-element {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.floating-element:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float1 6s ease-in-out infinite;
+}
+
+.floating-element:nth-child(2) {
+  top: 60%;
+  right: 15%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float2 8s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-180deg); }
+}
+
+/* Performance optimizations */
+.banner * {
+  will-change: transform;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .banner {
+    min-height: 400px;
+    border-radius: 0 0 16px 16px;
+  }
+  
+  .left-logo-group {
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    left: 1rem;
+    gap: 1rem;
+  }
+  
+  .main-logo {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .left-logo-text1 {
+    font-size: 1.1rem;
+  }
+  
+  .left-logo-text1.english {
+    font-size: 0.9rem;
+  }
+  
+  .overlay-logos {
+    top: 2rem;
+    right: 1rem;
+    gap: 1rem;
+  }
+  
+  .overlay-logo {
+    width: 70px;
+    height: 70px;
+    padding: 0.5rem;
+  }
+  
   .center-moving-text {
-    position: absolute;
-    top: 50%;
-    left: -800px; /* ⬅ thêm dòng này để đồng bộ */
-    transform: translateY(-50%);
-    font-size: 60px;
-    font-weight: bold;
-    color: #01A85A;
-  }
-  .moving-text-container {
-
-    height: 80px; /* Giảm chiều cao container */
+    font-size: clamp(2rem, 5vw, 3rem);
   }
 }
-@media (max-width: 1100px) {
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-image,
+  .center-moving-text,
+  .left-logo-group,
+  .logo-wrapper,
+  .overlay-logo,
+  .main-logo,
+  .banner::before,
+  .floating-element {
+    animation: none;
+    transition: none;
+  }
+  
+  .banner-image {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .left-logo-group {
+    left: 2rem;
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+  
+  .logo-wrapper {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .left-logo-group {
+    background: #ffffff;
+    border: 3px solid #000000;
+  }
+  
+  .left-logo-text1,
+  .left-logo-text1.english {
+    color: #000000;
+    text-shadow: none;
+    -webkit-text-fill-color: #000000;
+  }
+  
+  .left-logo-text2 {
+    color: #333333;
+    text-shadow: none;
+  }
+  
   .center-moving-text {
-    position: absolute;
-    top: 50%;
-    left: -800px; /* ⬅ thêm dòng này để đồng bộ */
-    transform: translateY(-50%);
-    font-size: 50px;
-    font-weight: bold;
-    color: #01A85A;
+    color: #000000;
+    text-shadow: 3px 3px 0px #ffffff;
+    -webkit-text-fill-color: #000000;
   }
-  .moving-text-container {
-
-    height: 80px; /* Giảm chiều cao container */
+  
+  .overlay-logo {
+    background: #ffffff;
+    border: 2px solid #000000;
   }
 }
-
-@media (max-width: 480px) {
-  .moving-text-container {
-    height: 60px; /* Giảm chiều cao container thêm */
-  }
-}
-
-

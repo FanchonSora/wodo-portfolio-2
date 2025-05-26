@@ -1,0 +1,29 @@
+:root {
+  --font-base: 'Inter', sans-serif;
+  --color-primary: #1E3A8A;
+  --color-accent: #01A85A;
+  --color-bg: #F9FAFB;
+  --color-card: #FFFFFF;
+  --color-card-bg: #ffffff;
+  --color-text: #374151;
+  --color-text-primary: #333333;
+  --shadow: 0 8px 24px rgba(0,0,0,0.1);
+  --shadow-default: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 12px 28px rgba(0,0,0,0.15);
+  --radius: 1rem;
+  --radius-base: 0.5rem;
+  --spacing-unit: 1rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}

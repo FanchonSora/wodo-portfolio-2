@@ -1,8 +1,8 @@
- 
- 
- 
- 
- 
+
+
+
+
+
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import './layout.css';
@@ -15,9 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="layout">
       <Header />
-      <main className="main">
-        {children}
-      </main>
+      <main className="main">{children}</main>
       <Footer />
     </div>
   );
